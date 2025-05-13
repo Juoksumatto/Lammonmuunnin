@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lämpötilan muunnin</title>
+</head>
+<body>
+    <form id="converterForm"></form>
+        <select id="conversionType">
+            <option value="CtoF">Celsius -> Fahrenheit</option>
+            <option value="FtoC">Fahrenheit -> Celsius</option>
+        </select><br>
+        <label for="temperature">Syötä lämpötila:</label><br>
+        <input type="number" id="temperature" name="temperature" required>
+        <button type="button" onclick="convertTemperature()">Muunna</button><br>
+        <input type="radio" id="decimal1" name="decimals" value="1" checked>
+        <label for="decimal1">1 desimaali</label><br>
+        <input type="radio" id="decimal2" name="decimals" value="2">
+        <label for="decimal2">2 desimaalia</label><br>
+        <input type="radio" id="decimal3" name="decimals" value="3">
+        <label for="decimal3">3 desimaalia</label><br><br>
+
+        
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+        function convertTemperature() {
+            const temperature = parseFloat(document.getElementById('temperature').value);
+            const decimals = parseInt(document.querySelector('input[name="decimals"]:checked').value);
+
+            if (isNaN(temperature)) {
+                alert('Syötä kelvollinen lämpötila.');
+                return;
+            }
+
+            const fahrenheit = (temperature * 9/5) + 32;
+            const roundedFahrenheit = fahrenheit.toFixed(decimals);
+
+            document.getElementById('result').textContent = 
+                `${temperature} °C on ${roundedFahrenheit} °F`;
+        
+            document.getElementById('conversionType').addEventListener ('change', function() {
+                const conversionType = this.value;
+                if (conversionType === 'FtoC') {
+                    const celsius = (temperature - 32) * 5/9;
+                    const roundedCelsius = celsius.toFixed(decimals);
+                    document.getElementById('result').textContent = 
+                        `${temperature} °F on ${roundedCelsius} °C`;
+                } else {
+                    document.getElementById('result').textContent = 
+                        `${temperature} °C on ${roundedFahrenheit} °F`;
+                }
+            });
+        }
+    </script>
+</body>
+</html>
