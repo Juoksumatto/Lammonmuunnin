@@ -46,7 +46,7 @@
                     const celsius = (temperature - 32) * 5/9;
                     const roundedCelsius = celsius.toFixed(decimals);
                     document.getElementById('result').textContent = 
-                        `${temperature} °F on  °C`;
+                        `${temperature} °F on ${roundedCelsius} °C`;
                 } else {
                      document.getElementById('result').textContent = 
                         `${temperature} °C on ${roundedFahrenheit} °F`;
